@@ -2,6 +2,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
+from django.test import LiveServerTestCase
 
 
 # Testcase class
@@ -31,15 +32,18 @@ class NewVisitorTest(unittest.TestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(inputbox.get_attribute('placeholder'),
                          "Enter a to-do item")
+        inputbox.send_keys('Buy peacock feathers')
+        inputbox.send_keys(Keys.ENTER)
+        self.check_if_row_exists_in_list_table('1: Buy peacock feathers')
 
-        inputbox.send_keys('Buy a dog')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
 
         # import time
         # time.sleep(10)
-        self.check_if_row_exists_in_list_table('1: Buy a dog')
-        self.check_if_row_exists_in_list_table('2: Use peacock ' +
-                                               'feathers to make a fly')
+        self.check_if_row_exists_in_list_table(
+            '2: Use peacock feathers to make a fly')
 
         self.fail("Finished the test!")
 
