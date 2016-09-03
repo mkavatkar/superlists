@@ -8,7 +8,6 @@ from django.test import LiveServerTestCase
 # Testcase class
 class NewVisitorTest(LiveServerTestCase):
 
-
     # setup the chrome driver
     def setUp(self):
         self.chromedriver = "/Users/mihirkavatkar/Documents/chromedriver"
@@ -48,9 +47,9 @@ class NewVisitorTest(LiveServerTestCase):
 
         # import time
         # time.sleep(10)
-        self.check_for_row_in_list_table(
+        self.check_if_row_exists_in_list_table(
             '2: Use peacock feathers to make a fly')
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.check_if_row_exists_in_list_table('1: Buy peacock feathers')
 
         self.browser.quit()
         self.browser = webdriver.Chrome(self.chromedriver)
