@@ -2,11 +2,11 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 # Testcase class
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     # setup the chrome driver
     def setUp(self):
@@ -44,7 +44,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_start_a_list_and_retrieve_later(self):
         self.browser.get(self.live_server_url)
 
-        self.assertIn('to-do', self.browser.title)
+        self.assertIn('To-Do', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
 
@@ -66,9 +66,9 @@ class NewVisitorTest(LiveServerTestCase):
 
         # import time
         # time.sleep(10)
-        self.check_for_row_in_list_table(
+        self.check_if_row_exists_in_list_table(
             '2: Use peacock feathers to make a fly')
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.check_if_row_exists_in_list_table('1: Buy peacock feathers')
 
         self.browser.quit()
         self.browser = webdriver.Chrome(self.chromedriver)
