@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, reverse_lazy
 from lists.views import home_page
 from django.http import HttpRequest
 from django.template.loader import render_to_string
@@ -8,11 +8,21 @@ from lists.models import Item
 
 # Test class for list creation
 class NewListTest(TestCase):
-    def test_saving_a_post(self):
-        self.client.post(
-            '/list/new',
-            data='item_text': 'A new list item')
-        
+    def test_saving_a_post_request(self):
+        self.client.post('/lists/new',
+                         data={'item_text': "A new list item"})
+        new_item = Item.objects.first()
+        self.assertEqual(Item.objects.count(), 1)
+        self.assertEqual(new_item.text, 'A new list item')
+
+    def test_redirects_after_post(self):
+        response = self.client.post(
+            '/lists/new',
+            data={'item_text': 'A new list item'}
+        )
+        self.assertRedirects(response,
+                             '/lists/the-only-list-in-the-world/')
+
 
 # List view testcase to display in template
 class ListViewTest(TestCase):
@@ -47,11 +57,6 @@ class HomepageTest(TestCase):
             request=request1
             )
         self.assertEqual(response.content.decode(), expected_html)
-
-    def test_homepage_to_save_items_when_necessary(self):
-        request = HttpRequest()
-        home_page(request)
-        self.assertEqual(Item.objects.count(), 0)
 
     def test_home_page_can_save_a_post_request(self):
         request = HttpRequest()
