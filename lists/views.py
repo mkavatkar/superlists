@@ -11,7 +11,8 @@ def view_list(request):
 
 
 def new_list(request):
-    Item.objects.create(text=request.POST['item_text'])
+    List_ = List.objects.create()
+    Item.objects.create(text=request.POST['item_text'], list=List_)
     return redirect('/lists/the-only-list-in-the-world/')
 
 
