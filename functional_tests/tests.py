@@ -38,6 +38,8 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys('Buy peacock feathers')
         inputbox.send_keys(Keys.ENTER)
         edith_current_url = self.browser.current_url
+        # import time
+        # time.sleep(10)
         self.assertRegex(edith_current_url, '/lists/.+')
         self.check_if_row_exists_in_list_table('1: Buy peacock feathers')
 

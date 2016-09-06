@@ -7,14 +7,19 @@ from lists.models import Item, List
 # Create your views here.
 def view_list(request, list_id):
     List_ = List.objects.get(id=list_id)
-    items = Item.objects.filter(list=List_)
-    return render(request, 'list.html', {'items': items})
+    return render(request, 'list.html', {'list': List_})
+
+
+def add_item(request, list_id):
+    List_ = List.objects.get(id=list_id)
+    Item.objects.create(text=request.POST['item_text'], list=List_)
+    return redirect('/lists/%d/' % (List_.id,))
 
 
 def new_list(request):
     List_ = List.objects.create()
     Item.objects.create(text=request.POST['item_text'], list=List_)
-    return redirect('/lists/the-only-list-in-the-world/')
+    return redirect('/lists/%d/' % (List_.id,))
 
 
 @csrf_exempt
