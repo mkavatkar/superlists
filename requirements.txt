@@ -1,0 +1,4 @@
+-e git+https://github.com/django/django.git@4c7bf83cde9f698cad019a9b808dbe45a832d9c3#egg=Django
+django-polls==0.1
+psycopg2==2.6.2
+selenium==2.53.6
