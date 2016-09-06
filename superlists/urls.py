@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from lists import views
 
-
+# add a view in the url patterns to replace the conventional admin
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
     # url(r'^admin/', admin.site.urls),
