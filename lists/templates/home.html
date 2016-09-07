@@ -1,5 +1,12 @@
-{% extends 'base.html' %}
+<html>
+<title>to-do</title>
+<body>
+<h1>Start a new To-Do list</h1>
+<form method="POST">
+    <p style="text-align: center;">
+        <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+    </p>
 
-{% block header_text %}Start a new To-Do list{% endblock %}
-
-{% block form_action %}/lists/new{% endblock %}
+</form>
+</body>
+</html>
