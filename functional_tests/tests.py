@@ -10,7 +10,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     # setup the chrome driver
     def setUp(self):
-        self.chromedriver = "/Users/mihirkavatkar/Documents/chromedriver"
+        self.chromedriver = "/usr/local/bin/chromedriver/chromedriver"
         os.environ["webdriver.chrome.driver"] = self.chromedriver
         self.browser = webdriver.Chrome(self.chromedriver)
         self.browser.implicitly_wait(3)
